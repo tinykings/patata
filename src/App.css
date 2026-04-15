@@ -81,6 +81,16 @@ body {
   cursor: pointer;
 }
 
+.shutter-container.click-pulse {
+  animation: click-pulse 0.2s ease-out;
+}
+
+@keyframes click-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.97); }
+  100% { transform: scale(1); }
+}
+
 .shutter-inner-mask {
   position: relative;
   width: 100%;

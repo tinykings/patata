@@ -33,6 +33,13 @@ export function Timer({
   isMusicLoading
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [justClicked, setJustClicked] = useState(false);
+
+  const handleToggle = () => {
+    setJustClicked(true);
+    setTimeout(() => setJustClicked(false), 200);
+    onToggle();
+  };
   
   // Calculate progress: 0 when starting, 100 when finished
   const progress = currentDuration > 0 
@@ -52,8 +59,8 @@ export function Timer({
         style={{ '--accent-current': accentColor }}
       >
         <div 
-          className="shutter-container" 
-          onClick={onToggle}
+          className={`shutter-container ${justClicked ? 'click-pulse' : ''}`} 
+          onClick={handleToggle}
           title={tooltipText}
         >
           <div className="shutter-inner-mask">
