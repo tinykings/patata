@@ -49,7 +49,7 @@ export function Timer({
     : 0;
 
   const displayLabel = mode === 'work' ? 'Focus' : 'Break';
-  const tooltipText = `Click to ${isRunning ? 'pause' : 'play'}`;
+  const tooltipText = `CLICK TO ${isRunning ? 'PAUSE' : 'PLAY'}`;
   const accentColor = mode === 'work' ? 'var(--accent-focus)' : 'var(--accent-break)';
 
   return (
@@ -59,6 +59,7 @@ export function Timer({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{ '--accent-current': accentColor }}
+        title={displayLabel.toUpperCase()}
       >
         <div 
           className={`shutter-container ${justClicked ? 'click-pulse' : ''}`} 
@@ -80,7 +81,7 @@ export function Timer({
             <div className="shutter-view view-title">
               <div className="mode-title-container">
                 <div className="mini-timer">{timeLeft}</div>
-                <div className="time-display mode-title">
+                <div className="time-display mode-title" style={{ textTransform: 'uppercase' }}>
                   {displayLabel}
                 </div>
               </div>
