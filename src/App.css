@@ -47,7 +47,20 @@ body {
 .timer-section {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.music-station-display {
+  margin-top: 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+
+.shutter-hover.active .music-station-display {
+  opacity: 0;
 }
 
 /* KINETIC SHUTTER SLIDE */

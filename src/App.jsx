@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Timer } from './components/Timer';
 import { useTimer } from './hooks/useTimer';
 import { playAlarm } from './utils/alarm';
@@ -23,6 +23,8 @@ function App() {
     setMusicStation,
   } = useTimer();
 
+  const [isMusicLoading, setIsMusicLoading] = useState(false);
+
   useEffect(() => {
     if (timeLeftSeconds === 0 && !isRunning) {
       playAlarm();
@@ -46,9 +48,15 @@ function App() {
 
   useEffect(() => {
     if (musicStation && isRunning) {
-      play(STATION_URLS[musicStation]);
+      setIsMusicLoading(true);
+      const timeout = setTimeout(() => setIsMusicLoading(false), 3000);
+      play(STATION_URLS[musicStation], null, () => {
+        clearTimeout(timeout);
+        setIsMusicLoading(false);
+      });
     } else if (!musicStation || !isRunning) {
       stop();
+      setIsMusicLoading(false);
     }
   }, [isRunning, musicStation]);
 
@@ -90,6 +98,7 @@ function App() {
         onBreakChange={setBreakTime}
         musicStation={musicStation}
         onMusicChange={setMusicStation}
+        isMusicLoading={isMusicLoading}
       />
     </div>
   );

@@ -1,5 +1,22 @@
 import { useState } from 'react';
 
+const STATION_LABELS = {
+  '9128': '9128',
+  'drone-zone': 'Drone Zone',
+  'groove-salad': 'Groove Salad',
+  'kiosk-radio': 'Kiosk Radio',
+  'le-mellotron': 'Le Mellotron',
+  'nightwave-plaza': 'Nightwave Plaza',
+  'nts-la': 'NTS LA',
+  'nts-london': 'NTS London',
+  'radio-paradise': 'Radio Paradise',
+  'radiomeuh': 'Radiomeuh',
+  'soho-radio': 'Soho Radio',
+  'space-station': 'Space Station',
+  'subcity-radio': 'Subcity Radio',
+  'the-lot-radio': 'The Lot Radio',
+};
+
 export function Timer({ 
   timeLeft, 
   mode, 
@@ -12,7 +29,8 @@ export function Timer({
   onWorkChange,
   onBreakChange,
   musicStation,
-  onMusicChange
+  onMusicChange,
+  isMusicLoading
 }) {
   const [isHovered, setIsHovered] = useState(false);
   
@@ -110,6 +128,11 @@ export function Timer({
             </div>
           </div>
         </div>
+        {musicStation && isRunning && (
+          <div className="music-station-display">
+            {isMusicLoading ? 'loading...' : STATION_LABELS[musicStation]}
+          </div>
+        )}
       </div>
     </div>
   );

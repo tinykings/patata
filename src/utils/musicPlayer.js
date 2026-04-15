@@ -18,11 +18,12 @@ export const STATION_URLS = {
   'the-lot-radio': 'https://mdw-prod-catalyst-0.lp-playback.studio/hls/video+85c28sa2o8wppm58/index.m3u8?video=false',
 };
 
-export function play(url, onFadeComplete) {
+export function play(url, onFadeComplete, onPlaying) {
   stop();
   audio = new Audio(url);
   audio.loop = true;
   audio.volume = 0;
+  audio.addEventListener('playing', () => onPlaying?.(), { once: true });
   audio.play().catch(() => {});
 
   const steps = 30;
