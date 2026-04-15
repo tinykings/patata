@@ -1,6 +1,11 @@
-# Patata
+<h1 align="center"> Patata </h1>
 
-A minimalist focus timer with integrated internet radio streaming.
+<h3 align="center">A minimalist focus timer with integrated internet radio streaming.</h3>
+<h4 align="center">https://tinykings.github.io/patata/</h4>
+
+---
+
+
 
 ## Features
 
