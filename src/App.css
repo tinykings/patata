@@ -323,3 +323,16 @@ body {
   background: var(--bg-secondary);
   color: var(--text-white);
 }
+
+.tinykings-link {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.tinykings-link:hover {
+  color: var(--text-white);
+}
