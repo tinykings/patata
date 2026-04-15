@@ -51,7 +51,7 @@ export function useTimer() {
 
   useEffect(() => {
     const title = isRunning 
-      ? `${mode === 'work' ? 'Work' : 'Break'} ${formatTime(timeLeft)} - Patata`
+      ? `${mode === 'work' ? 'Focus' : 'Break'} ${formatTime(timeLeft)} - Patata`
       : 'Patata';
     document.title = title;
   }, [timeLeft, isRunning, mode]);

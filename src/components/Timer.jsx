@@ -21,6 +21,7 @@ export function Timer({
 
   const displayLabel = mode === 'work' ? 'Focus' : 'Break';
   const tooltipText = `Click to ${isRunning ? 'pause' : 'play'}`;
+  const accentColor = mode === 'work' ? 'var(--accent-focus)' : 'var(--accent-break)';
 
   return (
     <div className="timer-section">
@@ -28,6 +29,7 @@ export function Timer({
         className={`time-display-wrapper shutter-hover ${isHovered ? 'active' : ''}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        style={{ '--accent-current': accentColor }}
       >
         <div 
           className="shutter-container" 
