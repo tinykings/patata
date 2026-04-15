@@ -92,6 +92,8 @@ function App() {
         currentDuration={currentDuration}
         timeLeftSeconds={timeLeftSeconds}
         onToggle={toggleTimer}
+        onSwitchMode={switchMode}
+        onStart={start}
         workDuration={workDuration}
         breakDuration={breakDuration}
         onWorkChange={setWorkTime}

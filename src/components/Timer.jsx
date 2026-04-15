@@ -24,6 +24,8 @@ export function Timer({
   currentDuration, 
   timeLeftSeconds, 
   onToggle,
+  onSwitchMode,
+  onStart,
   workDuration,
   breakDuration,
   onWorkChange,
@@ -86,6 +88,32 @@ export function Timer({
         </div>
         
         <div className={`hover-content ${isHovered ? 'visible' : ''}`}>
+          <div className="mode-switch">
+            <button 
+              className={`mode-btn ${mode === 'work' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (mode !== 'work') {
+                  onSwitchMode();
+                  if (isRunning) onStart();
+                }
+              }}
+            >
+              Focus
+            </button>
+            <button 
+              className={`mode-btn ${mode === 'break' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (mode !== 'break') {
+                  onSwitchMode();
+                  if (isRunning) onStart();
+                }
+              }}
+            >
+              Break
+            </button>
+          </div>
           <div className="inline-settings">
             <div className="setting-input">
               <label>Focus</label>
