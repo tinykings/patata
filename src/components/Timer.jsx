@@ -92,10 +92,13 @@ export function Timer({
                 onClick={(e) => e.stopPropagation()}
               >
                 <option value="">None</option>
-                <option value="groove-salad">Groove Salad</option>
+                <option value="9128">9128</option>
                 <option value="drone-zone">Drone Zone</option>
-                <option value="nts-london">NTS London</option>
+                <option value="groove-salad">Groove Salad</option>
+                <option value="kiosk-radio">Kiosk Radio</option>
+                <option value="nightwave-plaza">Nightwave Plaza</option>
                 <option value="nts-la">NTS LA</option>
+                <option value="nts-london">NTS London</option>
               </select>
             </div>
           </div>

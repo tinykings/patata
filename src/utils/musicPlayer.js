@@ -2,10 +2,13 @@ let audio = null;
 let fadeInterval = null;
 
 export const STATION_URLS = {
-  'groove-salad': 'https://ice1.somafm.com/groovesalad-256-mp3',
+  '9128': 'http://streams.radio.co:80/s0aa1e6f4a/listen',
   'drone-zone': 'https://ice1.somafm.com/dronezone-256-mp3',
-  'nts-london': 'http://stream-relay-geo.ntslive.net/stream',
+  'groove-salad': 'https://ice1.somafm.com/groovesalad-256-mp3',
+  'kiosk-radio': 'https://kioskradiobxl.out.airtime.pro/kioskradiobxl_b',
+  'nightwave-plaza': 'http://radio.plaza.one/ogg',
   'nts-la': 'http://stream-relay-geo.ntslive.net/stream2',
+  'nts-london': 'http://stream-relay-geo.ntslive.net/stream',
 };
 
 export function play(url, onFadeComplete) {
