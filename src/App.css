@@ -57,10 +57,12 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--text-dim);
+  transition: opacity 0.3s ease 0.5s;
 }
 
 .shutter-hover.active .music-station-display {
   opacity: 0;
+  transition: opacity 0.1s;
 }
 
 /* KINETIC SHUTTER SLIDE */
