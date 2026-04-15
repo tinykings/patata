@@ -37,6 +37,14 @@ function App() {
   }, [timeLeftSeconds, isRunning, mode, switchMode, start]);
 
   useEffect(() => {
+    const color = mode === 'work' ? '%2306d6a0' : '%23ffd166';
+    const favicon = document.querySelector("link[rel='icon']");
+    if (favicon) {
+      favicon.href = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='${color}'/></svg>`;
+    }
+  }, [mode]);
+
+  useEffect(() => {
     if (musicStation && isRunning) {
       play(STATION_URLS[musicStation]);
     } else if (!musicStation || !isRunning) {
