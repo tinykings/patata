@@ -89,30 +89,32 @@ export function Timer({
         
         <div className={`hover-content ${isHovered ? 'visible' : ''}`}>
           <div className="mode-switch">
-            <button 
-              className={`mode-btn ${mode === 'work' ? 'active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation();
-                if (mode !== 'work') {
+            {mode === 'break' && (
+              <button 
+                className="mode-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
                   onSwitchMode();
                   if (isRunning) onStart();
-                }
-              }}
-            >
-              Focus
-            </button>
-            <button 
-              className={`mode-btn ${mode === 'break' ? 'active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation();
-                if (mode !== 'break') {
+                }}
+                title="Switch to Focus"
+              >
+                Focus
+              </button>
+            )}
+            {mode === 'work' && (
+              <button 
+                className="mode-btn mode-btn-break"
+                onClick={(e) => {
+                  e.stopPropagation();
                   onSwitchMode();
                   if (isRunning) onStart();
-                }
-              }}
-            >
-              Break
-            </button>
+                }}
+                title="Switch to Break"
+              >
+                Break
+              </button>
+            )}
           </div>
           <div className="inline-settings">
             <div className="setting-input">

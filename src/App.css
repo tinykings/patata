@@ -227,12 +227,12 @@ body {
   color: var(--text-white);
 }
 
-.mode-btn.active {
+.mode-btn {
   background: var(--accent-focus);
   color: var(--bg-primary);
 }
 
-.mode-btn.active:nth-child(2) {
+.mode-btn.mode-btn-break {
   background: var(--accent-break);
 }
 
