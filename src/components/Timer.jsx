@@ -96,9 +96,16 @@ export function Timer({
                 <option value="drone-zone">Drone Zone</option>
                 <option value="groove-salad">Groove Salad</option>
                 <option value="kiosk-radio">Kiosk Radio</option>
+                <option value="le-mellotron">Le Mellotron</option>
                 <option value="nightwave-plaza">Nightwave Plaza</option>
                 <option value="nts-la">NTS LA</option>
                 <option value="nts-london">NTS London</option>
+                <option value="radio-paradise">Radio Paradise</option>
+                <option value="radiomeuh">Radiomeuh</option>
+                <option value="soho-radio">Soho Radio</option>
+                <option value="space-station">Space Station</option>
+                <option value="subcity-radio">Subcity Radio</option>
+                <option value="the-lot-radio">The Lot Radio</option>
               </select>
             </div>
           </div>
