@@ -165,6 +165,9 @@ export function Timer({
             </div>
           </div>
         </div>
+        <div className="timer-mode-label" style={{ color: accentColor }}>
+          {displayLabel}
+        </div>
         {musicStation && isRunning && (
           <div className="music-station-display">
             {isMusicLoading ? 'loading...' : STATION_LABELS[musicStation]}
