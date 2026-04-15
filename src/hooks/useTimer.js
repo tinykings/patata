@@ -18,6 +18,11 @@ export function useTimer() {
     return saved ? parseInt(saved, 10) : DEFAULT_BREAK_TIME;
   });
 
+  const [musicStation, setMusicStation] = useState(() => {
+    const saved = localStorage.getItem('patata-music-station');
+    return saved || null;
+  });
+
   const [timeLeft, setTimeLeft] = useState(workDuration);
   const intervalRef = useRef(null);
 
@@ -29,6 +34,10 @@ export function useTimer() {
   useEffect(() => {
     localStorage.setItem('patata-break-duration', breakDuration.toString());
   }, [breakDuration]);
+
+  useEffect(() => {
+    localStorage.setItem('patata-music-station', musicStation || '');
+  }, [musicStation]);
 
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
@@ -107,5 +116,7 @@ export function useTimer() {
     setWorkTime,
     setBreakTime,
     switchMode,
+    musicStation,
+    setMusicStation,
   };
 }

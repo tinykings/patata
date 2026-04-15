@@ -10,7 +10,9 @@ export function Timer({
   workDuration,
   breakDuration,
   onWorkChange,
-  onBreakChange
+  onBreakChange,
+  musicStation,
+  onMusicChange
 }) {
   const [isHovered, setIsHovered] = useState(false);
   
@@ -80,6 +82,18 @@ export function Timer({
                 onClick={(e) => e.stopPropagation()}
                 min="1"
               />
+            </div>
+            <div className="divider" />
+            <div className="setting-input">
+              <label>Music</label>
+              <select 
+                value={musicStation || ''} 
+                onChange={(e) => onMusicChange(e.target.value || null)}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <option value="">None</option>
+                <option value="groove-salad">Groove Salad</option>
+              </select>
             </div>
           </div>
         </div>

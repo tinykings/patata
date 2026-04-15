@@ -227,3 +227,25 @@ body {
   height: 24px;
   background: var(--bg-tertiary);
 }
+
+.setting-input select {
+  background: var(--bg-tertiary);
+  border: none;
+  color: var(--text-white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.setting-input select:focus {
+  background: #353535;
+}
+
+.setting-input select option {
+  background: var(--bg-secondary);
+  color: var(--text-white);
+}

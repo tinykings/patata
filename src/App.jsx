@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Timer } from './components/Timer';
 import { useTimer } from './hooks/useTimer';
 import { playAlarm } from './utils/alarm';
+import { play, stop, fadeOut, fadeIn, STATION_URLS } from './utils/musicPlayer';
 import './App.css';
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
     setWorkTime,
     setBreakTime,
     switchMode,
+    musicStation,
+    setMusicStation,
   } = useTimer();
 
   useEffect(() => {
@@ -32,6 +35,29 @@ function App() {
       setTimeout(() => start(), 100);
     }
   }, [timeLeftSeconds, isRunning, mode, switchMode, start]);
+
+  useEffect(() => {
+    if (musicStation) {
+      const url = STATION_URLS[musicStation];
+      if (isRunning) {
+        play(url);
+      } else {
+        stop();
+      }
+    }
+  }, [isRunning, musicStation]);
+
+  useEffect(() => {
+    if (musicStation && timeLeftSeconds === 5) {
+      fadeOut();
+    }
+  }, [timeLeftSeconds, musicStation]);
+
+  useEffect(() => {
+    if (musicStation && timeLeftSeconds === 0 && isRunning) {
+      fadeIn(50);
+    }
+  }, [timeLeftSeconds, isRunning, musicStation]);
 
   const toggleTimer = () => {
     if (isRunning) {
@@ -57,6 +83,8 @@ function App() {
         breakDuration={breakDuration}
         onWorkChange={setWorkTime}
         onBreakChange={setBreakTime}
+        musicStation={musicStation}
+        onMusicChange={setMusicStation}
       />
     </div>
   );
