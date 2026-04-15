@@ -4,6 +4,8 @@ let fadeInterval = null;
 export const STATION_URLS = {
   'groove-salad': 'https://ice1.somafm.com/groovesalad-256-mp3',
   'drone-zone': 'https://ice1.somafm.com/dronezone-256-mp3',
+  'nts-london': 'http://stream-relay-geo.ntslive.net/stream',
+  'nts-la': 'http://stream-relay-geo.ntslive.net/stream2',
 };
 
 export function play(url, onFadeComplete) {

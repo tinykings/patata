@@ -94,6 +94,8 @@ export function Timer({
                 <option value="">None</option>
                 <option value="groove-salad">Groove Salad</option>
                 <option value="drone-zone">Drone Zone</option>
+                <option value="nts-london">NTS London</option>
+                <option value="nts-la">NTS LA</option>
               </select>
             </div>
           </div>
