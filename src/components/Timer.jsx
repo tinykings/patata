@@ -16,6 +16,46 @@ export function Timer({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   
+  const getInstallInstructions = () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return {
+        icon: 'iOS',
+        title: 'Install on iOS',
+        steps: [
+          'Tap the Share button in Safari',
+          'Scroll down and tap "Add to Home Screen"',
+          'Tap "Add" to confirm'
+        ]
+      };
+    }
+    
+    if (/Android/.test(userAgent)) {
+      return {
+        icon: 'Android',
+        title: 'Install on Android',
+        steps: [
+          'Tap the menu button (three dots)',
+          'Tap "Install app" or "Add to Home screen"',
+          'Tap "Install" to confirm'
+        ]
+      };
+    }
+    
+    return {
+      icon: 'Desktop',
+      title: 'Install on Desktop',
+      steps: [
+        'Click the install icon in the address bar',
+        'Or use Ctrl+Shift+B (Windows/Linux)',
+        'Look for the app launcher icon in your dock'
+      ]
+    };
+  };
+  
+  const instructions = getInstallInstructions();
+  
   // Calculate progress: 0 when starting, 100 when finished
   const progress = currentDuration > 0 
     ? ((currentDuration - timeLeftSeconds) / currentDuration) * 100 
@@ -98,6 +138,18 @@ export function Timer({
                 <option value="nts-la">NTS LA</option>
               </select>
             </div>
+          </div>
+          
+          <div className="install-section">
+            <div className="install-header">
+              <span className="install-icon">{instructions.icon === 'iOS' ? '🍎' : instructions.icon === 'Android' ? '🤖' : '💻'}</span>
+              <span>{instructions.title}</span>
+            </div>
+            <ul className="install-steps">
+              {instructions.steps.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
