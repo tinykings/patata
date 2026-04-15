@@ -1,0 +1,227 @@
+:root {
+  --bg-primary: #121212;
+  --bg-secondary: #1E1E1E;
+  --bg-tertiary: #2A2A2A;
+  --accent-lime: #C0FF00;
+  --muted-accent: #556B2F;
+  --text-white: #FFFFFF;
+  --text-dim: rgba(255, 255, 255, 0.6);
+  --radius-card: 64px;
+  --radius-pill: 32px;
+  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-white);
+  margin: 0;
+  overflow: hidden;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  padding-top: 80px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+}
+
+/* TIMER VIEW */
+.timer-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* KINETIC SHUTTER SLIDE */
+.time-display-wrapper {
+  position: relative;
+  width: 1000px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shutter-container {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Fixed height for animation */
+  overflow: visible;
+  cursor: pointer;
+}
+
+.shutter-inner-mask {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.shutter-view {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.view-numbers {
+  top: 0;
+  opacity: 1;
+  filter: blur(0);
+}
+
+.shutter-hover.active .view-numbers {
+  transform: translateY(100%);
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.view-title {
+  top: -100%;
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.shutter-hover.active .view-title {
+  top: 0;
+  opacity: 1;
+  filter: blur(0);
+}
+
+.time-display {
+  font-size: 140px;
+  font-weight: 800;
+  letter-spacing: -8px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 900px;
+  padding: 0 50px;
+
+  /* Fill Inside Text Effect */
+  background: linear-gradient(
+    to right, 
+    var(--accent-lime) var(--progress, 0%), 
+    var(--text-white) var(--progress, 0%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background 0.3s ease;
+}
+
+/* HOVER TITLE CONTAINER */
+.mode-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.mini-timer {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent-lime);
+  letter-spacing: 4px;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 10px;
+}
+
+.mode-title {
+  font-size: 140px;
+  color: var(--text-white);
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  background: none;
+}
+
+/* HOVER CONTENT (SETTINGS ONLY) */
+.hover-content {
+  position: absolute;
+  bottom: 0; /* Positioned at bottom of wrapper */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease 0.2s;
+  pointer-events: none;
+}
+
+.hover-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* INLINE SETTINGS */
+.inline-settings {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--bg-secondary);
+  padding: 12px 24px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.setting-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.setting-input label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.setting-input input {
+  background: var(--bg-tertiary);
+  border: none;
+  color: var(--text-white);
+  font-size: 18px;
+  font-weight: 700;
+  width: 50px;
+  padding: 8px;
+  border-radius: 8px;
+  text-align: center;
+  outline: none;
+  transition: background 0.2s ease;
+}
+
+.setting-input input:focus {
+  background: #353535;
+}
+
+.inline-settings .divider {
+  width: 1px;
+  height: 24px;
+  background: var(--bg-tertiary);
+}
