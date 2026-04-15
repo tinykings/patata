@@ -1,16 +1,57 @@
-# React + Vite
+# Patata
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalist focus timer with integrated internet radio streaming.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Pomodoro Timer** - Customizable focus and break durations
+- **Music Streaming** - Play internet radio while you work
+  - Groove Salad (SomaFM)
+  - Drone Zone (SomaFM)
+  - NTS London
+  - NTS LA
+- **Smooth Transitions** - Music fades in/out with timer state changes
+- **Offline Support** - Install as a PWA for offline access
+- **Auto Notifications** - Get notified when timers complete
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Install Dependencies
 
-## Expanding the ESLint configuration
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Development
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+## Music Behavior
+
+- Music plays when the timer starts
+- 5 seconds before timer ends, music fades out
+- When timer ends, music fades back in
+- Pausing the timer stops the music immediately
+- Changing stations while timer is running switches immediately
+
+## PWA Installation
+
+This app can be installed on desktop and mobile devices:
+
+- **iOS**: Open in Safari, tap Share > Add to Home Screen
+- **Android**: Open in Chrome, tap menu > Install app
+- **Desktop**: Click the install icon in your browser's address bar
+
+## Tech Stack
+
+- React
+- Vite
+- vite-plugin-pwa
