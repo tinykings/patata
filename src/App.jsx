@@ -37,13 +37,10 @@ function App() {
   }, [timeLeftSeconds, isRunning, mode, switchMode, start]);
 
   useEffect(() => {
-    if (musicStation) {
-      const url = STATION_URLS[musicStation];
-      if (isRunning) {
-        play(url);
-      } else {
-        stop();
-      }
+    if (musicStation && isRunning) {
+      play(STATION_URLS[musicStation]);
+    } else if (!musicStation || !isRunning) {
+      stop();
     }
   }, [isRunning, musicStation]);
 

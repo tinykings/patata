@@ -93,6 +93,7 @@ export function Timer({
               >
                 <option value="">None</option>
                 <option value="groove-salad">Groove Salad</option>
+                <option value="drone-zone">Drone Zone</option>
               </select>
             </div>
           </div>
