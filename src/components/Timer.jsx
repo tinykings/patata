@@ -89,35 +89,36 @@ export function Timer({
         </div>
         
         <div className={`hover-content ${isHovered ? 'visible' : ''}`}>
-          <div className="mode-switch">
-            {mode === 'break' && (
-              <button 
-                className="mode-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSwitchMode();
-                  if (isRunning) onStart();
-                }}
-                title="Switch to Focus"
-              >
-                Focus
-              </button>
-            )}
-            {mode === 'work' && (
-              <button 
-                className="mode-btn mode-btn-break"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSwitchMode();
-                  if (isRunning) onStart();
-                }}
-                title="Switch to Break"
-              >
-                Break
-              </button>
-            )}
-          </div>
           <div className="inline-settings">
+            <div className="mode-switch">
+              {mode === 'break' && (
+                <button 
+                  className="mode-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSwitchMode();
+                    if (isRunning) onStart();
+                  }}
+                  title="Switch to Focus"
+                >
+                  Focus
+                </button>
+              )}
+              {mode === 'work' && (
+                <button 
+                  className="mode-btn mode-btn-break"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSwitchMode();
+                    if (isRunning) onStart();
+                  }}
+                  title="Switch to Break"
+                >
+                  Break
+                </button>
+              )}
+            </div>
+            <div className="divider" />
             <div className="setting-input">
               <label>Focus</label>
               <input 
