@@ -223,21 +223,29 @@ body {
 /* HOVER CONTENT (SETTINGS ONLY) */
 .hover-content {
   position: absolute;
-  bottom: 0;
+  top: 50%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease 0.2s;
+  transform: translateY(-30px);
+  transition: all 0.5s ease 0.2s;
   pointer-events: none;
+}
+
+.hover-content.visible {
+  opacity: 1;
+  transform: translateY(calc(-50% + 130px));
+  pointer-events: auto;
+  transition: all 0.5s ease 0.2s;
 }
 
 .hover-content.visible {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  transition: all 0.4s ease 0.2s;
 }
 
 .mode-switch {
@@ -281,9 +289,13 @@ body {
   align-items: center;
   gap: 24px;
   background: var(--bg-secondary);
-  padding: 12px 24px;
+  padding-top: 6px;
+  padding-bottom: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-top: 60px;
 }
 
 .setting-input {
