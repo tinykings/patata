@@ -193,6 +193,25 @@ body {
   margin-bottom: 10px;
 }
 
+.click-hint {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-current);
+  opacity: 0;
+  margin-bottom: 8px;
+  transform: translateY(60px);
+  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  pointer-events: none;
+}
+
+.shutter-hover.active .click-hint {
+  opacity: 1;
+  transform: translateY(60px);
+  transition: opacity 0.5s ease 1s, transform 0.5s ease 1s;
+}
+
 .mode-title {
   font-size: 140px;
   color: var(--text-white);
