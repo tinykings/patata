@@ -176,6 +176,13 @@ export function Timer({
               </svg>
             </a>
           </div>
+          <div className="keyboard-shortcuts">
+            <span>Space</span> Start/Pause
+            <span className="shortcut-divider">·</span>
+            <span>M</span> Random music
+            <span className="shortcut-divider">·</span>
+            <span>F</span> Switch mode
+          </div>
         </div>
         <div className="timer-mode-label" style={{ color: accentColor }}>
           {displayLabel}

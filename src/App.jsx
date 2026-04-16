@@ -83,6 +83,26 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      
+      if (e.key === ' ') {
+        e.preventDefault();
+        toggleTimer();
+      } else if (e.key.toLowerCase() === 'm') {
+        const stations = Object.keys(STATION_URLS);
+        const randomStation = stations[Math.floor(Math.random() * stations.length)];
+        setMusicStation(randomStation);
+      } else if (e.key.toLowerCase() === 'f') {
+        switchMode();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [switchMode, setMusicStation, toggleTimer]);
+
   return (
     <div className="app">
       <Timer 

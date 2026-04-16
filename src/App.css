@@ -357,3 +357,22 @@ body {
 .tinykings-link:hover {
   color: var(--text-white);
 }
+
+.keyboard-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+.keyboard-shortcuts span {
+  font-weight: 600;
+  color: var(--text-white);
+}
+
+.shortcut-divider {
+  margin: 0 8px;
+  opacity: 0.5;
+}
