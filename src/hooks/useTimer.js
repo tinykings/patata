@@ -40,17 +40,28 @@ export function useTimer() {
   }, [musicStation]);
 
   useEffect(() => {
-    if (isRunning && timeLeft > 0) {
-      intervalRef.current = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-    } else if (timeLeft === 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsRunning(false);
-      clearInterval(intervalRef.current);
+    if (!isRunning) {
+      return undefined;
     }
-    return () => clearInterval(intervalRef.current);
-  }, [isRunning, timeLeft]);
+
+    intervalRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+          setIsRunning(false);
+          return 0;
+        }
+
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    };
+  }, [isRunning]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);

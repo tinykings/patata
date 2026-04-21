@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Timer } from './components/Timer';
 import { useTimer } from './hooks/useTimer';
 import { playAlarm } from './utils/alarm';
@@ -6,6 +6,7 @@ import { play, stop, fadeOut, fadeIn, STATION_URLS } from './utils/musicPlayer';
 import './App.css';
 
 function App() {
+  const supportsNotifications = typeof window !== 'undefined' && 'Notification' in window;
   const {
     timeLeft,
     timeLeftSeconds,
@@ -24,19 +25,23 @@ function App() {
   } = useTimer();
 
   const [isMusicLoading, setIsMusicLoading] = useState(false);
+  const completionTimeoutRef = useRef(null);
+  const musicLoadingShowTimeoutRef = useRef(null);
+  const musicLoadingHideTimeoutRef = useRef(null);
 
   useEffect(() => {
     if (timeLeftSeconds === 0 && !isRunning) {
       playAlarm();
-      if (Notification.permission === 'granted') {
+      if (supportsNotifications && Notification.permission === 'granted') {
         new Notification('Patata', {
           body: mode === 'work' ? 'Time for a break' : 'Ready to focus?',
         });
       }
       switchMode();
-      setTimeout(() => start(), 100);
+      completionTimeoutRef.current = setTimeout(() => start(), 100);
     }
-  }, [timeLeftSeconds, isRunning, mode, switchMode, start]);
+    return () => clearTimeout(completionTimeoutRef.current);
+  }, [timeLeftSeconds, isRunning, mode, switchMode, start, supportsNotifications]);
 
   useEffect(() => {
     const color = mode === 'work' ? '%2306d6a0' : '%23ffd166';
@@ -48,16 +53,24 @@ function App() {
 
   useEffect(() => {
     if (musicStation && isRunning) {
-      setIsMusicLoading(true);
-      const timeout = setTimeout(() => setIsMusicLoading(false), 3000);
+      clearTimeout(musicLoadingHideTimeoutRef.current);
+      musicLoadingShowTimeoutRef.current = setTimeout(() => setIsMusicLoading(true), 0);
+      musicLoadingHideTimeoutRef.current = setTimeout(() => setIsMusicLoading(false), 3000);
       play(STATION_URLS[musicStation], null, () => {
-        clearTimeout(timeout);
+        clearTimeout(musicLoadingShowTimeoutRef.current);
+        clearTimeout(musicLoadingHideTimeoutRef.current);
         setIsMusicLoading(false);
       });
     } else if (!musicStation || !isRunning) {
+      clearTimeout(musicLoadingShowTimeoutRef.current);
+      musicLoadingHideTimeoutRef.current = setTimeout(() => setIsMusicLoading(false), 0);
       stop();
-      setIsMusicLoading(false);
     }
+    return () => {
+      clearTimeout(musicLoadingShowTimeoutRef.current);
+      clearTimeout(musicLoadingHideTimeoutRef.current);
+      clearTimeout(completionTimeoutRef.current);
+    };
   }, [isRunning, musicStation]);
 
   useEffect(() => {
@@ -72,16 +85,16 @@ function App() {
     }
   }, [timeLeftSeconds, isRunning, musicStation]);
 
-  const toggleTimer = () => {
+  const toggleTimer = useCallback(() => {
     if (isRunning) {
       pause();
     } else {
-      if (Notification.permission === 'default') {
+      if (supportsNotifications && Notification.permission === 'default') {
         Notification.requestPermission();
       }
       start();
     }
-  };
+  }, [isRunning, pause, start, supportsNotifications]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
