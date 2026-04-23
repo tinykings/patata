@@ -25,7 +25,6 @@ function App() {
   } = useTimer();
 
   const [isMusicLoading, setIsMusicLoading] = useState(false);
-  const completionTimeoutRef = useRef(null);
   const musicLoadingShowTimeoutRef = useRef(null);
   const musicLoadingHideTimeoutRef = useRef(null);
 
@@ -38,9 +37,8 @@ function App() {
         });
       }
       switchMode();
-      completionTimeoutRef.current = setTimeout(() => start(), 100);
+      start();
     }
-    return () => clearTimeout(completionTimeoutRef.current);
   }, [timeLeftSeconds, isRunning, mode, switchMode, start, supportsNotifications]);
 
   useEffect(() => {
@@ -69,7 +67,6 @@ function App() {
     return () => {
       clearTimeout(musicLoadingShowTimeoutRef.current);
       clearTimeout(musicLoadingHideTimeoutRef.current);
-      clearTimeout(completionTimeoutRef.current);
     };
   }, [isRunning, musicStation]);
 
