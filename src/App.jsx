@@ -95,8 +95,12 @@ function App() {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.target.tagName === 'INPUT') return;
-      
+      if (e.target instanceof HTMLElement) {
+        if (e.target.closest('input, select, textarea, button, a, [contenteditable="true"]')) {
+          return;
+        }
+      }
+
       if (e.key === ' ') {
         e.preventDefault();
         toggleTimer();

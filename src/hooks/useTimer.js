@@ -3,19 +3,31 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 const DEFAULT_WORK_TIME = 25 * 60;
 const DEFAULT_BREAK_TIME = 5 * 60;
 
+function readDuration(key, fallback) {
+  const saved = localStorage.getItem(key);
+  const parsed = saved ? Number.parseInt(saved, 10) : Number.NaN;
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function normalizeMinutes(value) {
+  const minutes = typeof value === 'string' ? Number.parseInt(value, 10) : value;
+  if (!Number.isFinite(minutes) || minutes < 1) {
+    return null;
+  }
+
+  return minutes;
+}
+
 export function useTimer() {
   const [mode, setMode] = useState('work');
   const [isRunning, setIsRunning] = useState(false);
   
-  // Load initial durations from localStorage or use defaults
   const [workDuration, setWorkDuration] = useState(() => {
-    const saved = localStorage.getItem('patata-work-duration');
-    return saved ? parseInt(saved, 10) : DEFAULT_WORK_TIME;
+    return readDuration('patata-work-duration', DEFAULT_WORK_TIME);
   });
   
   const [breakDuration, setBreakDuration] = useState(() => {
-    const saved = localStorage.getItem('patata-break-duration');
-    return saved ? parseInt(saved, 10) : DEFAULT_BREAK_TIME;
+    return readDuration('patata-break-duration', DEFAULT_BREAK_TIME);
   });
 
   const [musicStation, setMusicStation] = useState(() => {
@@ -26,7 +38,6 @@ export function useTimer() {
   const [timeLeft, setTimeLeft] = useState(workDuration);
   const intervalRef = useRef(null);
 
-  // Persistence: Save durations to localStorage
   useEffect(() => {
     localStorage.setItem('patata-work-duration', workDuration.toString());
   }, [workDuration]);
@@ -96,7 +107,10 @@ export function useTimer() {
   }, [mode, workDuration, breakDuration]);
 
   const setWorkTime = useCallback((minutes) => {
-    const seconds = minutes * 60;
+    const normalizedMinutes = normalizeMinutes(minutes);
+    if (normalizedMinutes === null) return;
+
+    const seconds = normalizedMinutes * 60;
     setWorkDuration(seconds);
     if (mode === 'work' && !isRunning) {
       setTimeLeft(seconds);
@@ -104,7 +118,10 @@ export function useTimer() {
   }, [mode, isRunning]);
 
   const setBreakTime = useCallback((minutes) => {
-    const seconds = minutes * 60;
+    const normalizedMinutes = normalizeMinutes(minutes);
+    if (normalizedMinutes === null) return;
+
+    const seconds = normalizedMinutes * 60;
     setBreakDuration(seconds);
     if (mode === 'break' && !isRunning) {
       setTimeLeft(seconds);

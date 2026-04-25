@@ -124,7 +124,7 @@ export function Timer({
               <input 
                 type="number" 
                 value={workDuration} 
-                onChange={(e) => onWorkChange(Number(e.target.value))}
+                onChange={(e) => onWorkChange(e.target.value)}
                 onClick={(e) => e.stopPropagation()}
                 min="1"
               />
@@ -135,7 +135,7 @@ export function Timer({
               <input 
                 type="number" 
                 value={breakDuration} 
-                onChange={(e) => onBreakChange(Number(e.target.value))}
+                onChange={(e) => onBreakChange(e.target.value)}
                 onClick={(e) => e.stopPropagation()}
                 min="1"
               />
